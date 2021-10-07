@@ -6,7 +6,7 @@
 
 * open and project folder in VS code then follow below commnad -
 
-'''bash
+```bash
 echo "# dvc-ML-demo-AIOps" >> README.md
 git init
 git add README.md
@@ -14,30 +14,29 @@ git commit -m "first commit"
 git branch -M main
 git remote add origin https://github.com/nilakanta55/dvc-ml-demo-AIOps.git
 git push -u origin main
-'''
+```
 
-'''bash
+```bash
 touch .gitignore
-'''
+```
 content of the gitignore can be found from reference repository 
 
 ## STEP 03: create and activate conda environment
 
-'''bash
+```bash
 conda create -n dvc-ml python=3.7 -y
 conda activate dvc-ml
-'''
+```
 
-'''
 
 ## STEP 04: create a setup file
 
-'''bash
+```bash
 touch setup.py
-'''
+```
 paste the below content in the setup.py file and make the necessary changes as per your user ID-
 
-'''python
+```python
 from setuptools import setup
 
 with open("README.md", "r", encoding="utf-8") as f:
@@ -60,57 +59,58 @@ setup(
         'scikit-learn'
     ]
 )
-'''
+```
 
 ## STEP 05: create requirement file and install dependencies
 
-'''bash
+```bash
 touch requirements.txt
 pip install -r requirements.txt
-'''
+```
 content of requirements.txt - Refer the reference repository
 
 ## STEP 06: initialize dvc
 
-'''bash
+```bash
 dvc init
-'''
+```
 
 ## STEP 07: create the basic directory structure
 
-'''bash
+```bash
 mkdir -p src/utils config
-'''
+```
 
 ## STEP 08: create the config file
-'''bash
+```bash
 touch config/config.yml
-'''
+```
 content of config.yml -
 
-'''yaml
+```yaml
 data_source: http://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv
 
 artifacts: 
   artifacts_dir: artifacts
   raw_local_dir: raw_local_dir
   raw_local_file: data.csv
-'''
+```
 
 ## STEP 09: create the stage 01 python file and all_utils file:
 
-'''bash
+```bash
 touch src/stage_01_load_save.py src/utils/all_utils.py
-'''
+```
 content of both these files can be refererd from the reference given
 
 ## STEP 10: create the dvc.yaml file and add the stage 01:
 
-'''bash
+```bash
 touch dvc.yaml
-'''
+```
 content of dvc.yaml file -
-'''yaml
+
+```yaml
 stages:
   load_data:
     cmd: python src/stage_01_load_save.py --config=config/config.yaml
@@ -120,18 +120,18 @@ stages:
       - config/config.yaml
     outs:
       - artifacts/raw_local_dir/data.csv
-'''
+```
 
 ## STEP 11: run the dvc repro command
 
-'''bash
+```bash
 dvc repro
-'''
+```
 
 ## STEP 12: push the changes to remote repository
 
-'''bash
+```bash
 git add .
 git commit -m "stage 01 added"
 git push origin main
-'''
+```
